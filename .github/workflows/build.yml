@@ -1,12 +1,8 @@
 name: Docker Build Image
 
 on:
-    push:
-        branches:
-            - release
-        paths-ignore:
-            - 'README.md'
-            - 'LICENSE'
+  push:
+    branches: ['release']
 
 env:
     PLATFORMS: linux/amd64,linux/arm64
