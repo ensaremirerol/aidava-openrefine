@@ -16,8 +16,7 @@ RUN set -xe \
     && cd /opt/openrefine \
     && curl -sSL ${OPENREFINE_URL} | tar xz --strip 1 \
     && if [ -n "${EXTENSION_URI}" ]; then \
-    mkdir -p /opt/openrefine/extensions && \
-    cd /opt/openrefine/extensions && \
+    cd /opt/openrefine/webapp/extensions && \
     curl -sSL ${EXTENSION_URI} -o extension.zip && \
     unzip extension.zip && \
     rm extension.zip; \
