@@ -27,11 +27,6 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
-        with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
@@ -39,8 +34,8 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-                      ${{ env.IMAGE_NAME }}:${{ env.OPENREFINE_VERSION }}
-                      ${{ env.IMAGE_NAME }}:latest
+                      ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.OPENREFINE_VERSION }}
+                      ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
           build-args: |
                       OPENREFINE_VERSION=${{ env.OPENREFINE_VERSION }}
                       EXTENSION_URI=${{ env.EXTENSION_URI }}
