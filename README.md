@@ -10,11 +10,30 @@ On the root of the repository, run the following command:
 docker-compose up -d
 ```
 
+OpenRefine will be available at [http://localhost:3333](http://localhost:3333).
+
 To stop the container, run the following command:
 
 ```bash
 docker-compose down
 ```
+
+Note that the data will be persisted in the `data` directory.
+If you delete the `data` directory, all the data will be lost.
+
+### If you want to change the port
+
+You can change the port by modifying the `docker-compose.yml` file.
+
+```yaml
+
+services:
+  openrefine:
+    ports:
+      - "3333:3333"
+```
+
+Change the first `3333` to the port you want to use.
 
 ## Update
 
