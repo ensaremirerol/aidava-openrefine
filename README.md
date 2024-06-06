@@ -1,6 +1,7 @@
 # AIDAVA OpenRefine image
 
-This image is based on the [OpenRefine](http://openrefine.org/) project and contains required extensions for the AIDAVA project.
+This image is based on the [OpenRefine](http://openrefine.org/) project and
+contains required extensions for the AIDAVA project..
 
 ## Usage
 
@@ -18,19 +19,18 @@ To stop the container, run the following command:
 docker-compose down
 ```
 
-Note that the data will be persisted in the `data` directory.
-If you delete the `data` directory, all the data will be lost.
+Note that the data will be persisted in the `data` directory. If you delete the
+`data` directory, all the data will be lost.
 
 ### If you want to change the port
 
 You can change the port by modifying the `docker-compose.yml` file.
 
 ```yaml
-
 services:
   openrefine:
     ports:
-      - "3333:3333"
+      - '3333:3333'
 ```
 
 Change the first `3333` to the port you want to use.
@@ -45,8 +45,12 @@ docker-compose up
 
 ## Licenses
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
+for details.
 
-Also used [EasyPi/docker-openrefine](https://github.com/EasyPi/docker-openrefine) as a base.
+Also used
+[EasyPi/docker-openrefine](https://github.com/EasyPi/docker-openrefine) as a
+base.
 
-See OpenRefine [LICENSE](https://github.com/OpenRefine/OpenRefine/blob/master/LICENSE.txt)
+See OpenRefine
+[LICENSE](https://github.com/OpenRefine/OpenRefine/blob/master/LICENSE.txt)
