@@ -2,20 +2,18 @@
 # Dockerfile for OpenRefine with extension support
 #
 
-FROM openjdk:17-slim-bullseye
+FROM eclipse-temurin:25-alpine
 
-ARG OPENREFINE_VERSION
+ARG OPENREFINE_VERSION=3.7.6
 ARG OPENREFINE_FILE=openrefine-linux-${OPENREFINE_VERSION:?}.tar.gz
 ARG OPENREFINE_URL=https://github.com/OpenRefine/OpenRefine/releases/download/${OPENREFINE_VERSION}/${OPENREFINE_FILE}
 ARG UCUM_FHIR_EXTENSION_URL=https://github.com/MaastrichtU-IDS/ucum-fhir-openrefine-extension/releases/download/v0.2/openrefine-ucum-fhir-grel.zip
 ARG AIDAVA_TAGGER_EXTENSION_URL=https://github.com/AIDAVA-DEV/aidava-openrefine-tagger/releases/download/1.0-SNAPSHOT/aidava-tagger-1.0-SNAPSHOT.zip
 RUN set -xe \
-    && apt update \
-    && apt install -y curl procps unzip \
+    && apk add --no-cache bash curl procps unzip \
     && mkdir -p /opt/openrefine \
     && cd /opt/openrefine \
-    && curl -sSL ${OPENREFINE_URL} | tar xz --strip 1 \
-    && rm -rf /var/lib/apt/lists/*
+    && curl -sSL ${OPENREFINE_URL} | tar xz --strip 1
 
 RUN curl -sSL ${UCUM_FHIR_EXTENSION_URL}  -o /opt/openrefine/webapp/extensions/openrefine-ucum-fhir-grel.zip \
     && unzip /opt/openrefine/webapp/extensions/openrefine-ucum-fhir-grel.zip -d /opt/openrefine/webapp/extensions/ \

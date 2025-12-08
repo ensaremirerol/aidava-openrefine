@@ -1,14 +1,15 @@
-name: Docker Build Image
+name: Docker Build Image - SHACL API
 
 on:
   push:
     branches:
-      - 'main'
+      - main
 
 env:
-  OPENREFINE_VERSION: '3.7.6'
+  VERSION: ''
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
+  OPENREFINE_VERSION: '3.7.6'
 
 jobs:
   docker:
@@ -17,8 +18,15 @@ jobs:
       contents: read
     runs-on: ubuntu-latest
     steps:
+      - name: downcase REPO
+        run: |
+          echo "IMAGE_NAME=${IMAGE_NAME@L}" >> "${GITHUB_ENV}"
       - name: Checkout
         uses: actions/checkout@v4
+      - name: extract version
+        id: extract_version
+        run: |
+          echo "VERSION=$(git log -1 --format='%cd%h' --date=format:'%Y%m%d%H%M%S')" >> "${GITHUB_ENV}"
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx
@@ -36,7 +44,5 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.OPENREFINE_VERSION }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
-          build-args: |
-            OPENREFINE_VERSION=${{ env.OPENREFINE_VERSION }}
