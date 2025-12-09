@@ -7,7 +7,7 @@ FROM eclipse-temurin:25-alpine
 ARG OPENREFINE_VERSION=3.7.6
 ARG OPENREFINE_FILE=openrefine-linux-${OPENREFINE_VERSION:?}.tar.gz
 ARG OPENREFINE_URL=https://github.com/OpenRefine/OpenRefine/releases/download/${OPENREFINE_VERSION}/${OPENREFINE_FILE}
-ARG UCUM_FHIR_EXTENSION_URL=https://github.com/MaastrichtU-IDS/ucum-fhir-openrefine-extension/releases/download/v0.2/openrefine-ucum-fhir-grel.zip
+ARG UCUM_FHIR_EXTENSION_URL=https://github.com/MaastrichtU-IDS/ucum-fhir-openrefine-extension/releases/download/v0.3/openrefine-ucum-fhir-grel.zip
 ARG AIDAVA_TAGGER_EXTENSION_URL=https://github.com/AIDAVA-DEV/aidava-openrefine-tagger/releases/download/1.0-SNAPSHOT/aidava-tagger-1.0-SNAPSHOT.zip
 RUN set -xe \
     && apk add --no-cache bash curl procps unzip \
